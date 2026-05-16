@@ -145,8 +145,8 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
       {/* メニューエリア */}
       <main className="flex-1 overflow-y-auto px-4 py-4 space-y-3 pb-28">
         <h2 className="text-sm font-semibold text-gray-500">
-          {selectedCategory === "すべて" ? "全メニュー" : selectedCategory}
-        </h2>
+  {selectedCategory}
+</h2>
         {filteredMenus.map((item) => (
           <Card key={item.id} className={`shadow-sm ${item.is_sold_out ? "opacity-50" : ""}`}>
             <CardContent className="p-3 flex items-center gap-3">
