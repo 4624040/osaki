@@ -5,16 +5,16 @@ import { ShoppingCart, ChevronRight } from "lucide-react";
 const categories = ["すべて", "定食", "一品物", "ドリンク", "デザート"];
 
 const menuItems = [
-  { id: 1, name: "唐揚げ定食", price: 700, category: "定食", image: "/images/karaageteisyoku.jpg" },
-  { id: 2, name: "生姜焼き定食", price: 800, category: "定食", image: "/images/shougayakiteisyoku.jpg" },
-  { id: 3, name: "焼き鮭定食", price: 650, category: "定食", image: "/images/yakizyaketeisyoku.jpg" },
-  { id: 4, name: "だし巻き卵", price: 250, category: "一品物", image: "/images/dashimakitamago.jpg" },
-  { id: 5, name: "サラダ", price: 350, category: "一品物", image: "/images/sarada.jpg" },
-  { id: 6, name: "フライドポテト", price: 400, category: "一品物", image: "/images/huraidopoteto.jpg" },
-  { id: 7, name: "ジンジャエール", price: 200, category: "ドリンク", image: "/images/zinzyaeru.jpg" },
-  { id: 8, name: "コカ・コーラ", price: 200, category: "ドリンク", image: "/images/kora.jpg" },
-  { id: 9, name: "生ビール", price: 500, category: "ドリンク", image: "/images/biru.jpg" },
-  { id: 10, name: "バニラアイス", price: 300, category: "デザート", image: "/images/banira_ice.jpg" },
+  { id: 1, name: "唐揚げ定食", price: 700, category: "定食", image: "/images/karaageteisyoku.png" },
+  { id: 2, name: "生姜焼き定食", price: 800, category: "定食", image: "/images/syougayakiteisyoku.png" },
+  { id: 3, name: "焼き鮭定食", price: 650, category: "定食", image: "/images/yakizyaketeisyoku.png" },
+  { id: 4, name: "だし巻き卵", price: 200, category: "一品物", image: "/images/dashimakitamago.png" },
+  { id: 5, name: "サラダ", price: 300, category: "一品物", image: "/images/sarada.png" },
+  { id: 6, name: "フライドポテト", price: 400, category: "一品物", image: "/images/huraidopoteto.png" },
+  { id: 7, name: "ジンジャエール", price: 200, category: "ドリンク", image: "/images/zinzyaeru.png" },
+  { id: 8, name: "コカ・コーラ", price: 200, category: "ドリンク", image: "/images/kora.png" },
+  { id: 9, name: "生ビール", price: 500, category: "ドリンク", image: "/images/biru.png" },
+  { id: 10, name: "バニラアイス", price: 300, category: "デザート", image: "/images/banira.png" },
 ];
 
 export default function Home() {
