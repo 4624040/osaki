@@ -67,9 +67,9 @@ export default function Home() {
   const totalQty = orders.reduce((sum, o) => sum + o.qty, 0);
 
   return (
-    <div className="max-w-md mx-auto min-h-screen bg-gray-50 flex flex-col">
+    <div className="max-w-md mx-auto h-screen bg-gray-50 flex flex-col fixed inset-x-0 top-0 bottom-0">
       {/* ヘッダー */}
-      <header className="bg-stone-800 text-white px-4 py-4 sticky top-0 z-10">
+      <header className="bg-stone-800 text-white px-4 py-4 shrink-0">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-wide">OSAKI 食堂</h1>
           <button className="relative p-2" onClick={() => setShowCart(!showCart)}>
@@ -85,7 +85,7 @@ export default function Home() {
 
       {/* 注文カート（展開パネル） */}
       {showCart && (
-        <div className="bg-white border-b shadow-md px-4 py-4 space-y-3">
+        <div className="bg-white border-b shadow-md px-4 py-4 space-y-3 shrink-0">
           <h2 className="font-bold text-stone-800">注文リスト</h2>
           {orders.length === 0 ? (
             <p className="text-sm text-gray-400">まだ何も追加されていません</p>
@@ -114,6 +114,18 @@ export default function Home() {
                   <span>合計</span>
                   <span>¥{total.toLocaleString()}</span>
                 </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <span>割り勘：</span>
+                  <input
+                    type="number"
+                    min={1}
+                    value={people}
+                    onChange={(e) => setPeople(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-14 border rounded px-2 py-1 text-center"
+                  />
+                  <span>人 → 1人あたり</span>
+                  <span className="font-bold text-stone-800">¥{perPerson.toLocaleString()}</span>
+                </div>
               </div>
             </>
           )}
@@ -121,7 +133,7 @@ export default function Home() {
       )}
 
       {/* カテゴリタブ */}
-      <div className="bg-white border-b overflow-x-auto sticky top-16 z-10">
+      <div className="bg-white border-b overflow-x-auto shrink-0">
         <div className="flex px-4 py-2 gap-2 w-max">
           {categories.map((cat) => (
             <button
@@ -136,8 +148,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* メニューエリア */}
-      <main className="flex-1 px-4 py-4 space-y-3 pb-28">
+      {/* メニューエリア（ここだけスクロール） */}
+      <main className="flex-1 overflow-y-auto px-4 py-4 space-y-3 pb-28">
         <h2 className="text-sm font-semibold text-gray-500">全メニュー</h2>
         {menuItems.map((item) => (
           <Card key={item.id} className={`shadow-sm ${item.isSoldOut ? "opacity-50" : ""}`}>
@@ -169,7 +181,7 @@ export default function Home() {
       </main>
 
       {/* 注文リストボタン（固定フッター） */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-6 bg-gradient-to-t from-gray-50 pt-4">
+      <div className="shrink-0 px-4 pb-6 pt-4 bg-gradient-to-t from-gray-50">
         <Button
           onClick={() => setShowCart(!showCart)}
           className="w-full bg-stone-800 hover:bg-stone-700 h-14 text-base rounded-2xl flex items-center justify-between px-6"
