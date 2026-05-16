@@ -24,6 +24,7 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
   const [people, setPeople] = useState(1);
   const [showCart, setShowCart] = useState(false);
   const [errorId, setErrorId] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("すべて");
 
   const addToOrder = (item: MenuItem) => {
     if (item.is_sold_out) {
@@ -53,6 +54,10 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
   const total = calcTotal(orders);
   const perPerson = calcPerPerson(total, people);
   const totalQty = orders.reduce((sum, o) => sum + o.qty, 0);
+
+  const filteredMenus = menus.filter(
+    (item) => selectedCategory === "すべて" || item.category === selectedCategory
+  );
 
   return (
     <div className="max-w-md mx-auto h-screen bg-gray-50 flex flex-col fixed inset-x-0 top-0 bottom-0">
@@ -126,8 +131,9 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
           {categories.map((cat) => (
             <button
               key={cat}
+              onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap ${
-                cat === "すべて" ? "bg-stone-800 text-white" : "bg-gray-100 text-gray-600"
+                cat === selectedCategory ? "bg-stone-800 text-white" : "bg-gray-100 text-gray-600"
               }`}
             >
               {cat}
@@ -138,8 +144,10 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
 
       {/* メニューエリア */}
       <main className="flex-1 overflow-y-auto px-4 py-4 space-y-3 pb-28">
-        <h2 className="text-sm font-semibold text-gray-500">全メニュー</h2>
-        {menus.map((item) => (
+        <h2 className="text-sm font-semibold text-gray-500">
+          {selectedCategory === "すべて" ? "全メニュー" : selectedCategory}
+        </h2>
+        {filteredMenus.map((item) => (
           <Card key={item.id} className={`shadow-sm ${item.is_sold_out ? "opacity-50" : ""}`}>
             <CardContent className="p-3 flex items-center gap-3">
               <div className="w-20 h-20 bg-stone-100 shrink-0 overflow-hidden">
