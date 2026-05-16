@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShoppingCart, ChevronRight } from "lucide-react";
-import Image from "next/image";
 
 const categories = ["すべて", "定食", "一品物", "ドリンク", "デザート"];
 
@@ -60,12 +59,12 @@ export default function Home() {
         {menuItems.map((item) => (
           <Card key={item.id} className="shadow-sm">
             <CardContent className="p-3 flex items-center gap-3">
-              <div className="w-20 h-20 bg-stone-100 shrink-0 overflow-hidden relative">
-  <Image
+              <div className="w-20 h-20 bg-stone-100 shrink-0 overflow-hidden">
+  {/* eslint-disable-next-line @next/next/no-img-element */}
+  <img
     src={item.image}
     alt={item.name}
-    fill
-    className="object-cover"
+    className="w-full h-full object-cover"
   />
 </div>
               <div className="flex-1">
