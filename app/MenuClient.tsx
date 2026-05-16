@@ -25,6 +25,8 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
   const [showCart, setShowCart] = useState(false);
   const [errorId, setErrorId] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("すべて");
+  const [submitting, setSubmitting] = useState(false);
+  const [orderResult, setOrderResult] = useState<"success" | "error" | null>(null);
 
   const addToOrder = (item: MenuItem) => {
     if (item.is_sold_out) {
@@ -51,6 +53,33 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
     });
   };
 
+  const submitOrder = async () => {
+    if (submitting || orders.length === 0) return;
+    setSubmitting(true);
+    setOrderResult(null);
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: orders }),
+      });
+      if (res.ok) {
+        setOrderResult("success");
+        setOrders([]);
+        setShowCart(false);
+        setTimeout(() => setOrderResult(null), 3000);
+      } else {
+        setOrderResult("error");
+        setTimeout(() => setOrderResult(null), 3000);
+      }
+    } catch {
+      setOrderResult("error");
+      setTimeout(() => setOrderResult(null), 3000);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const total = calcTotal(orders);
   const perPerson = calcPerPerson(total, people);
   const totalQty = orders.reduce((sum, o) => sum + o.qty, 0);
@@ -61,11 +90,27 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
 
   return (
     <div className="max-w-md mx-auto h-screen flex flex-col fixed inset-x-0 top-0 bottom-0" style={{background: "#fdf6ee"}}>
+
+      {/* 注文成功・失敗メッセージ */}
+      {orderResult === "success" && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-2xl text-white text-sm font-bold shadow-lg"
+          style={{background: "#27ae60"}}>
+          🎉 注文が確定しました！ありがとうございます
+        </div>
+      )}
+      {orderResult === "error" && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-2xl text-white text-sm font-bold shadow-lg"
+          style={{background: "#c0392b"}}>
+          ⚠️ 注文の送信に失敗しました
+        </div>
+      )}
+
       {/* ヘッダー */}
       <header className="text-white px-4 py-4 shrink-0" style={{background: "linear-gradient(135deg, #5c3d2e, #8b5e3c)"}}>
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-widest">🍱 OSAKI 食堂</h1>
+            <p className="text-xs mt-0.5" style={{color: "#f5d9b8"}}>家庭の味をお届けします</p>
           </div>
           <button className="relative p-2" onClick={() => setShowCart(!showCart)}>
             <ShoppingCart className="w-6 h-6" />
@@ -122,6 +167,19 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
                   <span style={{color: "#5c3d2e"}}>人 → 1人あたり</span>
                   <span className="font-bold text-base" style={{color: "#8b5e3c"}}>¥{perPerson.toLocaleString()}</span>
                 </div>
+
+                {/* 注文確定ボタン */}
+                <button
+                  onClick={submitOrder}
+                  disabled={submitting}
+                  className="w-full h-12 rounded-2xl text-white font-bold text-base shadow-lg transition-transform active:scale-95"
+                  style={{
+                    background: submitting ? "#ccc" : "linear-gradient(135deg, #27ae60, #2ecc71)",
+                    cursor: submitting ? "not-allowed" : "pointer"
+                  }}
+                >
+                  {submitting ? "送信中..." : "✅ 注文を確定する"}
+                </button>
               </div>
             </>
           )}
