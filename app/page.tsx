@@ -114,18 +114,6 @@ export default function Home() {
                   <span>合計</span>
                   <span>¥{total.toLocaleString()}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <span>割り勘：</span>
-                  <input
-                    type="number"
-                    min={1}
-                    value={people}
-                    onChange={(e) => setPeople(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-14 border rounded px-2 py-1 text-center"
-                  />
-                  <span>人 → 1人あたり</span>
-                  <span className="font-bold text-stone-800">¥{perPerson.toLocaleString()}</span>
-                </div>
               </div>
             </>
           )}
