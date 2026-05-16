@@ -110,7 +110,6 @@ export default function MenuClient({ menus }: { menus: MenuItem[] }) {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-widest">🍱 OSAKI 食堂</h1>
-            <p className="text-xs mt-0.5" style={{color: "#f5d9b8"}}>家庭の味をお届けします</p>
           </div>
           <button className="relative p-2" onClick={() => setShowCart(!showCart)}>
             <ShoppingCart className="w-6 h-6" />
