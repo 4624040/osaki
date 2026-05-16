@@ -2,15 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShoppingCart, ChevronRight } from "lucide-react";
 
-const categories = ["すべて", "前菜", "メイン", "ドリンク", "デザート"];
+const categories = ["すべて", "定食", "一品物", "ドリンク", "デザート"];
 
 const menuItems = [
-  { id: 1, name: "看板料理 A", price: 980, category: "メイン", emoji: "🍱" },
-  { id: 2, name: "季節の前菜", price: 580, category: "前菜", emoji: "🥗" },
-  { id: 3, name: "特製スープ", price: 480, category: "前菜", emoji: "🍲" },
-  { id: 4, name: "本日のメイン", price: 1280, category: "メイン", emoji: "🍛" },
-  { id: 5, name: "クラフトビール", price: 680, category: "ドリンク", emoji: "🍺" },
-  { id: 6, name: "抹茶パフェ", price: 580, category: "デザート", emoji: "🍨" },
+  { id: 1, name: "唐揚げ定食", price: 980, category: "定食", emoji: "🍱" },
+  { id: 2, name: "生姜焼き定食", price: 580, category: "定食", emoji: "🥗" },
+  { id: 3, name: "焼き鮭定食", price: 480, category: "定食", emoji: "🍲" },
+  { id: 4, name: "一品物", price: 380, category: "一品物", emoji: "🥢" },
+  { id: 5, name: "ジンジャエール", price: 580, category: "ドリンク", emoji: "🍨" },
+  { id: 6, name: "コカ・コーラ", price: 580, category: "ドリンク", emoji: "🍨" },
+  { id: 7, name: "生ビール", price: 580, category: "ドリンク", emoji: "🍨" },
+  { id: 8, name: "バニラアイス", price: 300, category: "デザート", emoji: "🍨" },
 ];
 
 export default function Home() {
@@ -20,8 +22,7 @@ export default function Home() {
       <header className="bg-stone-800 text-white px-4 py-4 sticky top-0 z-10">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold tracking-wide">OSAKI 亭</h1>
-            <p className="text-xs text-stone-300">テーブル 3番</p>
+            <h1 className="text-xl font-bold tracking-wide">OSAKI 食堂</h1>
           </div>
           <button className="relative p-2">
             <ShoppingCart className="w-6 h-6" />
@@ -80,7 +81,7 @@ export default function Home() {
           <span className="bg-white text-stone-800 text-sm font-bold rounded-full w-7 h-7 flex items-center justify-center">
             2
           </span>
-          <span>注文リストを見る</span>
+          <span>注文カゴを確認する</span>
           <ChevronRight className="w-5 h-5" />
         </Button>
       </div>
