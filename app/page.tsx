@@ -5,14 +5,16 @@ import { ShoppingCart, ChevronRight } from "lucide-react";
 const categories = ["すべて", "定食", "一品物", "ドリンク", "デザート"];
 
 const menuItems = [
-  { id: 1, name: "唐揚げ定食", price: 980, category: "定食", emoji: "🍱" },
-  { id: 2, name: "生姜焼き定食", price: 580, category: "定食", emoji: "🥗" },
-  { id: 3, name: "焼き鮭定食", price: 480, category: "定食", emoji: "🍲" },
-  { id: 4, name: "一品物", price: 380, category: "一品物", emoji: "🥢" },
-  { id: 5, name: "ジンジャエール", price: 580, category: "ドリンク", emoji: "🍨" },
-  { id: 6, name: "コカ・コーラ", price: 580, category: "ドリンク", emoji: "🍨" },
-  { id: 7, name: "生ビール", price: 580, category: "ドリンク", emoji: "🍨" },
-  { id: 8, name: "バニラアイス", price: 300, category: "デザート", emoji: "🍨" },
+  { id: 1, name: "唐揚げ定食", price: 700, category: "定食", image: "/images/karaageteisyoku.jpg" },
+  { id: 2, name: "生姜焼き定食", price: 800, category: "定食", image: "/images/shougayakiteisyoku.jpg" },
+  { id: 3, name: "焼き鮭定食", price: 650, category: "定食", image: "/images/yakizyaketeisyoku.jpg" },
+  { id: 4, name: "だし巻き卵", price: 250, category: "一品物", image: "/images/dashimakitamago.jpg" },
+  { id: 5, name: "サラダ", price: 350, category: "一品物", image: "/images/sarada.jpg" },
+  { id: 6, name: "フライドポテト", price: 400, category: "一品物", image: "/images/huraidopoteto.jpg" },
+  { id: 7, name: "ジンジャエール", price: 200, category: "ドリンク", image: "/images/zinzyaeru.jpg" },
+  { id: 8, name: "コカ・コーラ", price: 200, category: "ドリンク", image: "/images/kora.jpg" },
+  { id: 9, name: "生ビール", price: 500, category: "ドリンク", image: "/images/biru.jpg" },
+  { id: 10, name: "バニラアイス", price: 300, category: "デザート", image: "/images/banira_ice.jpg" },
 ];
 
 export default function Home() {
@@ -57,9 +59,13 @@ export default function Home() {
         {menuItems.map((item) => (
           <Card key={item.id} className="shadow-sm">
             <CardContent className="p-3 flex items-center gap-3">
-              <div className="text-4xl w-14 h-14 bg-stone-100 rounded-xl flex items-center justify-center">
-                {item.emoji}
-              </div>
+              <div className="w-20 h-20 bg-stone-100 shrink-0 overflow-hidden">
+  <img
+    src={item.image}
+    alt={item.name}
+    className="w-full h-full object-cover"
+  />
+</div>
               <div className="flex-1">
                 <p className="font-medium text-sm">{item.name}</p>
                 <p className="text-xs text-gray-400">{item.category}</p>
